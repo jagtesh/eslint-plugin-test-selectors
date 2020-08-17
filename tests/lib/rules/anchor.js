@@ -34,8 +34,8 @@ ruleTester.run('anchor', rule, {
         { code: '<a data-test-id>Foo</a>', errors: [anchorError] },
         { code: '<a>Foo</a>', errors: [anchorError] },
         { code: '<a />', errors: [anchorError] },
-        { code: '<Foo href="bar" />', errors: [anchorError] },
-        { code: '<Foo href="bar" disabled={ bar } />', errors: [anchorError] },
-        { code: '<Foo href="bar" readonly={ bar } />', errors: [anchorError] }
+        { code: '<Foo href="bar" />', errors: [anchorError], output: '<Foo href="bar" data-test-id="foo" />' },
+        { code: '<Foo href="bar" disabled={ bar } />', errors: [anchorError], output: '<Foo href="bar" disabled={ bar } data-test-id="foo" />' },
+        { code: '<Foo href="bar" readonly={ bar } />', errors: [anchorError], output: '<Foo href="bar" readonly={ bar } data-test-id="foo" />' }
     ].map(parserOptionsMapper)
 });

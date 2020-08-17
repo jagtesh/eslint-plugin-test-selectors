@@ -8,12 +8,14 @@ const defaultParserOptions = {
 module.exports = function({
   code,
   errors,
+  output,
   options = [],
   parserOptions = {},
 }) {
   return {
     code,
     errors,
+    output: output || null,
     options,
     parserOptions: {
       ...defaultParserOptions,
