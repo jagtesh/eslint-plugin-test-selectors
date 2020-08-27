@@ -33,10 +33,15 @@ ruleTester.run('onKeyDown', rule, {
     invalid: [
         { code: '<div onKeyDown={ this.handleKeyDown } />', errors: [onKeyDownError] },
         { code: '<div onKeyDown={ this.handleKeyDown }>foo</div>', errors: [onKeyDownError] },
-        { code: '<Bar onKeyDown={ this.handleKeyDown } />', errors: [onKeyDownError] },
-        { code: '<Bar onKeyDown={ this.handleKeyDown }>foo</Bar>', errors: [onKeyDownError] },
-        { code: '<Bar onKeyDown={ () => handleKeyDown() }>foo</Bar>', errors: [onKeyDownError] },
-        { code: '<Bar onKeyDown={ () => handleKeyDown() } disabled={ bar }>foo</Bar>', errors: [onKeyDownError] },
-        { code: '<Bar onKeyDown={ () => handleKeyDown() } readonly={ bar }>foo</Bar>', errors: [onKeyDownError] }
+        { code: '<Bar onKeyDown={ this.handleKeyDown } />', errors: [onKeyDownError],
+            output: '<Bar onKeyDown={ this.handleKeyDown } data-test-id="bar" />' },
+        { code: '<Bar onKeyDown={ this.handleKeyDown }>foo</Bar>', errors: [onKeyDownError],
+            output: '<Bar onKeyDown={ this.handleKeyDown } data-test-id="bar">foo</Bar>' },
+        { code: '<Bar onKeyDown={ () => handleKeyDown() }>foo</Bar>', errors: [onKeyDownError],
+            output: '<Bar onKeyDown={ () => handleKeyDown() } data-test-id="bar">foo</Bar>' },
+        { code: '<Bar onKeyDown={ () => handleKeyDown() } disabled={ bar }>foo</Bar>', errors: [onKeyDownError],
+            output: '<Bar onKeyDown={ () => handleKeyDown() } disabled={ bar } data-test-id="bar">foo</Bar>' },
+        { code: '<Bar onKeyDown={ () => handleKeyDown() } readonly={ bar }>foo</Bar>', errors: [onKeyDownError],
+            output: '<Bar onKeyDown={ () => handleKeyDown() } readonly={ bar } data-test-id="bar">foo</Bar>' }
     ].map(parserOptionsMapper)
 });

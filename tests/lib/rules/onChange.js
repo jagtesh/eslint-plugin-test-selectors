@@ -33,10 +33,15 @@ ruleTester.run('onChange', rule, {
     invalid: [
         { code: '<div onChange={ this.handleClick } />', errors: [onChangeError] },
         { code: '<div onChange={ this.handleClick }>foo</div>', errors: [onChangeError] },
-        { code: '<Bar onChange={ this.handleClick } />', errors: [onChangeError] },
-        { code: '<Bar onChange={ this.handleClick }>foo</Bar>', errors: [onChangeError] },
-        { code: '<Bar onChange={ () => handleChange() }>foo</Bar>', errors: [onChangeError] },
-        { code: '<Bar onChange={ () => handleChange() } disabled={ foo }>foo</Bar>', errors: [onChangeError] },
-        { code: '<Bar onChange={ () => handleChange() } readonly={ foo }>foo</Bar>', errors: [onChangeError] }
+        { code: '<Bar onChange={ this.handleClick } />', errors: [onChangeError],
+            output: '<Bar onChange={ this.handleClick } data-test-id="bar" />' },
+        { code: '<Bar onChange={ this.handleClick }>foo</Bar>', errors: [onChangeError],
+            output: '<Bar onChange={ this.handleClick } data-test-id="bar">foo</Bar>' },
+        { code: '<Bar onChange={ () => handleChange() }>foo</Bar>', errors: [onChangeError],
+            output: '<Bar onChange={ () => handleChange() } data-test-id="bar">foo</Bar>' },
+        { code: '<Bar onChange={ () => handleChange() } disabled={ foo }>foo</Bar>', errors: [onChangeError],
+            output: '<Bar onChange={ () => handleChange() } disabled={ foo } data-test-id="bar">foo</Bar>' },
+        { code: '<Bar onChange={ () => handleChange() } readonly={ foo }>foo</Bar>', errors: [onChangeError],
+            output: '<Bar onChange={ () => handleChange() } readonly={ foo } data-test-id="bar">foo</Bar>' }
     ].map(parserOptionsMapper)
 });
